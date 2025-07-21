@@ -1,10 +1,10 @@
 
-
-const express = require("express");
 const dotenv=require('dotenv')
+dotenv.config()
+const express = require("express");
+
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-dotenv.config()
 const app=express()
 const port=process.env.PORT ||5000
 
@@ -15,7 +15,11 @@ app.get('/',(req,res)=>{
     res.send('kam koratse')
   
 })
-  
+  app.listen(port,()=>{
+    console.log(`server running on http://localhost:${port}`);
+    
+})
+
 const emailTransporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -64,8 +68,5 @@ app.get('/send-email',async(req,res)=>{
     }
 })
 
-app.listen(port,()=>{
-    console.log(`server running on http://localhost:${port}`);
-    
-})
+
 
